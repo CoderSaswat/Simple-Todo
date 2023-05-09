@@ -1,0 +1,19 @@
+.view-todos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+
+}
+
+.view-todos table{
+    width: 80%;
+}
+.action-icons{
+    /* display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: inherit;
+    box-sizing: border-box; */
+    text-align: center;
+}

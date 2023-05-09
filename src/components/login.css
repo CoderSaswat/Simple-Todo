@@ -1,0 +1,36 @@
+.login{
+    width: 100%;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.login form{
+    background-color: rgb(144, 230, 233);
+    height: 60%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-around; */
+    flex-direction: column;
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-top: 10px;
+
+}
+
+.form-btn-group-login{
+    margin-top: 190px;
+    width: 30%;
+    height: 23px;
+}
+
+.form-btn-group-signup{
+    margin-top: 80px;
+    width: 30%;
+    height: 23px;
+}
