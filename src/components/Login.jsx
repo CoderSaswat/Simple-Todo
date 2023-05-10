@@ -13,15 +13,6 @@ const Login = ({ user }) => {
   const [data, setData] = useState({});
   const navigate = useNavigate();
 
-  const [fuser, setfUser] = useState(null);
-  useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((userf) => {
-      setfUser(userf);
-      // console.log("Firebase ru asichi - >", userf);
-    });
-    return () => unsubscribe();
-  }, []);
-
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -36,7 +27,7 @@ const Login = ({ user }) => {
         getUsersMe()
           .then((res) => {
             setCurrentUser(res);
-            toast.success("Logged in successful");
+            toast.success("Logged with Gmail successful");
             navigate("/");
           })
           .catch((err) => {
@@ -52,7 +43,7 @@ const Login = ({ user }) => {
         getUsersMe().then((res) => {
           setCurrentUser(res);
           console.log(user.currentUser);
-          toast.success("Logged in successful");
+          toast.success("Logged in with Gmail and password successful");
           navigate("/");
         });
       })
@@ -91,13 +82,23 @@ const Login = ({ user }) => {
               style={{ width: "140px", cursor: "pointer" }}
               onClick={handleLogin}
             >
-              Login <FontAwesomeIcon icon={faRightToBracket} flip/>
+              Login <FontAwesomeIcon icon={faRightToBracket} flip />
             </button>
             <button
-              style={{ width: "140px", cursor: "pointer", display: 'flex', justifyContent : 'space-between' }}
+              style={{
+                width: "140px",
+                cursor: "pointer",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
               onClick={handleLoginWithGoogle}
             >
-              Login with Google <img height={'20px'} src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/706px-Google_%22G%22_Logo.svg.png" alt="" />
+              Login with Google{" "}
+              <img
+                height={"20px"}
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/706px-Google_%22G%22_Logo.svg.png"
+                alt=""
+              />
               {/* Login with <FontAwesomeIcon icon={faGoogleLogo} /> */}
             </button>
           </div>

@@ -5,28 +5,34 @@ import firebase from "../sevices/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { RecaptchaVerifier } from "firebase/auth";
 import { getUsersMe } from "../sevices/userService";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const SignInPhone = ({ user }) => {
-    const { setCurrentUser } = user;
+  const { setCurrentUser } = user;
   const [phoneNumber, setPhoneNumber] = useState("");
   const [verificationId, setVerificationId] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
 
+  const navigator = useNavigate();
+
   useEffect(() => {
-    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
-        'size': 'invisible',
-        'callback': (response) => {
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+      "recaptcha",
+      {
+        size: "invisible",
+        callback: (response) => {
           // reCAPTCHA solved, allow signInWithPhoneNumber.
-          console.log("REE", response)
-          handleSendVerificationCode();
-        }
-      });
+          console.log("REE", response);
+        },
+      }
+    );
 
     //   window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
   }, []);
 
   const handleSendVerificationCode = async () => {
-    const appVerifier = await  window.recaptchaVerifier;
+    const appVerifier = await window.recaptchaVerifier;
 
     firebase
       .auth()
@@ -50,13 +56,20 @@ export const SignInPhone = ({ user }) => {
         .auth()
         .signInWithCredential(credential);
       console.log("User details after verification-> ", userCredential.user);
-      localStorage.setItem("accessToken", userCredential?.user?._delegate?.accessToken);
-      getUsersMe().then((res)=>{
-        setCurrentUser(res);
-        console.log(res)
-      }).catch((err)=>{
-        console.log("Me err", err)
-      })
+      localStorage.setItem(
+        "accessToken",
+        userCredential?.user?._delegate?.accessToken
+      );
+      getUsersMe()
+        .then((res) => {
+          setCurrentUser(res);
+          toast.success("Loggedin with phone number successful");
+          navigator("/");
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log("Me err", err);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -70,25 +83,27 @@ export const SignInPhone = ({ user }) => {
             e.preventDefault();
           }}
         >
-          <div className="form-group">
-            <label htmlFor="email">Phone number</label>
-            <input
-              type="text"
-              name="email"
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              value={phoneNumber}
-            />
-          </div>
-          <button
-            style={{ width: "140px", cursor: "pointer" }}
-            onClick={handleSendVerificationCode}
-            id="sign-in-button"
-          >
-            Send Otp <FontAwesomeIcon icon={faPaperPlane} flip />
-          </button>
-
-          {verificationId && (
-            <div className="otp">
+          {!verificationId ? (
+            <>
+              <div className="form-group">
+                <label htmlFor="email">Phone number</label>
+                <input
+                  type="text"
+                  name="email"
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  value={phoneNumber}
+                />
+              </div>
+              <button
+                style={{ width: "140px", cursor: "pointer", marginTop: "40px" }}
+                onClick={handleSendVerificationCode}
+                id="sign-in-button"
+              >
+                Send Otp <FontAwesomeIcon icon={faPaperPlane} flip />
+              </button>
+            </>
+          ) : (
+            <>
               <div className="form-group">
                 <label htmlFor="password">Enter OTP</label>
                 <input
@@ -100,17 +115,18 @@ export const SignInPhone = ({ user }) => {
               </div>
               <button
                 style={{
-                  width: "140px",
+                  width: "95px",
                   cursor: "pointer",
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "center",
+                  marginTop: "50px",
                 }}
                 onClick={handleVerifyCode}
               >
                 VerifyOtp
                 {/* Login with <FontAwesomeIcon icon={faGoogleLogo} /> */}
               </button>
-            </div>
+            </>
           )}
         </form>
         <div id="recaptcha" style={{ display: "none" }}></div>
