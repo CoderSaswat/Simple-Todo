@@ -18,6 +18,7 @@ const Login = ({ user }) => {
         localStorage.setItem("accessToken", response.accessToken);
         getUsersMe().then((res) => {
           setCurrentUser(res);
+          console.log(user.currentUser);
           toast.success("Logged in successful");
           navigate("/")
         });

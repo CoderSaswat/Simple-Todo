@@ -1,9 +1,10 @@
 import React from 'react'
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 export const SecuredRoute = (props) => {
-    if(props.user != null){
+    
+    if(localStorage.getItem("accessToken") != null){
         return props.children;
     }else{
         toast.error("please login")

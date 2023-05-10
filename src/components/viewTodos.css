@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: aqua;
+    /* background-color: aqua; */
 
 }
 
@@ -16,4 +16,86 @@
     height: inherit;
     box-sizing: border-box; */
     text-align: center;
+}
+
+table{
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    margin-top: 50px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    font-family: arial, sans-serif;
+}
+table td{
+    word-wrap: break-word;
+    text-align: center;
+    padding: 5px;
+}
+table tr{
+    height: 45px;
+}
+table td,th{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+select{
+    width: 100%;
+    height: 30px;
+    text-align: center;
+
+}
+select option{
+    width: 100%;
+    text-align: center;
+    height: 30px;
+}
+
+.status-completed{
+    color: green;
+}
+.status-cancel{
+    color: red;
+    text-decoration: line-through;
+}
+.status-over-due{
+    color: orange;
+}
+.dialog{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    left: 150px;
+    width: 100vw;
+}
+.dialog .box{
+    transform: translate(-50%, -50%);
+    /* border: 2px solid black; */
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.box h5{
+    font-size: 24px;
+}
+.box p{
+    text-align: left;
+
+}
+.box .btns{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+}
+.box .btns button{
+    height: 30px;
+    width: 80px;
 }

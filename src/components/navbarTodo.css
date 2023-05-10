@@ -15,17 +15,26 @@
     color: white;
     font-weight: bold;
     padding-inline: 30px;
+    
 }
 .login-signup-button{
     /* width: 70px; */
     height: 30px;
     padding-inline: 10px;
     cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bolder;
 }
 .login-signup-button:hover{
     background-color: rgb(209, 202, 202);
 }
 .login-signup{
     display: flex;
+    gap: 10px;
+}
+.user-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
 }

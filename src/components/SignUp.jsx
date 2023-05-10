@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./login.css";
 import { getUsersMe, signUp } from "../sevices/userService";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = ({user}) => {
   const { setCurrentUser } = user;
@@ -9,6 +10,8 @@ const SignUp = ({user}) => {
     profilePhotoUrl:
       "https://thumbs.dreamstime.com/b/faceless-businessman-avatar-man-suit-blue-tie-human-profile-userpic-face-features-web-picture-gentlemen-85824471.jpg",
   });
+
+  const navigator = useNavigate();
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -19,8 +22,12 @@ const SignUp = ({user}) => {
       getUsersMe().then((res) => {
         setCurrentUser(res);
         toast.success("signed up successful");
-        // console.log(res);
+        navigator("/add-todo");
+      }).catch((err)=>{
+        toast(err.response.data.message);
       });
+    }).catch((err)=>{
+      toast.error(err.response.data.message)
     });
   };
   return (

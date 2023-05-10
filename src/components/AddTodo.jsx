@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { addTodo } from "../sevices/todoService";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AddTodo = () => {
   const [data, setData] = useState({});
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -12,6 +14,7 @@ const AddTodo = () => {
     addTodo(data)
       .then((res) => {
         toast.success("todo added");
+        navigate("/");
       })
       .catch((err) => {
         toast.error(err.response.data.message);

@@ -14,7 +14,6 @@ import { SecuredRoute } from "./components/SecuredRoute";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import UpdateTodo from "./components/UpdateTodo";
 
-
 const App = () => {
   const [isLoader, setIsLoader] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
@@ -85,9 +84,23 @@ const App = () => {
             path="/signup"
             element={<SignUp user={{ currentUser, setCurrentUser }} />}
           />
-          <Route path="/add-todo" element={<SecuredRoute user={currentUser}><AddTodo /></SecuredRoute>} />
-          <Route path="/" element={<SecuredRoute user={currentUser} ><ViewTodos /></SecuredRoute>} />
-          <Route path="/update-todo/:id" element={<UpdateTodo/>}/>
+          <Route
+            path="/add-todo"
+            element={
+              <SecuredRoute user={currentUser}>
+                <AddTodo />
+              </SecuredRoute>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <SecuredRoute user={currentUser}>
+                <ViewTodos />
+              </SecuredRoute>
+            }
+          />
+          <Route path="/update-todo/:id" element={<UpdateTodo />} />
         </Routes>
       </BrowserRouter>
     </>
