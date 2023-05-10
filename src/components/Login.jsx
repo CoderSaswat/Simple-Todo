@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import firebaseAuth from "../sevices/firebase";
 import firebase from "../sevices/firebase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
 const Login = ({ user }) => {
   const { setCurrentUser } = user;
@@ -86,16 +88,17 @@ const Login = ({ user }) => {
           </div>
           <div className="form-btn-group-login">
             <button
-              style={{ width: "100%", cursor: "pointer" }}
+              style={{ width: "140px", cursor: "pointer" }}
               onClick={handleLogin}
             >
-              Login
+              Login <FontAwesomeIcon icon={faRightToBracket} flip/>
             </button>
             <button
-              style={{ width: "100%", cursor: "pointer" }}
+              style={{ width: "140px", cursor: "pointer", display: 'flex', justifyContent : 'space-between' }}
               onClick={handleLoginWithGoogle}
             >
-              Login with Google
+              Login with Google <img height={'20px'} src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/706px-Google_%22G%22_Logo.svg.png" alt="" />
+              {/* Login with <FontAwesomeIcon icon={faGoogleLogo} /> */}
             </button>
           </div>
         </form>

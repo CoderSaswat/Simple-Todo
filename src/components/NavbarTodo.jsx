@@ -3,6 +3,8 @@ import "./navbarTodo.css";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import firebase from "../sevices/firebase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightFromBracket, faRightToBracket, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 const NavbarTodo = ({ user }) => {
   const { currentUser, setCurrentUser } = user;
   return (
@@ -48,17 +50,17 @@ const NavbarTodo = ({ user }) => {
                     toast.success("logged out succesfully");
                   }}
                 >
-                  Logout
+                  Logout <FontAwesomeIcon icon={faArrowRightFromBracket} flip />
                 </button>
               </Link>
             </div>
           ) : (
             <div>
               <Link to={"/signup"}>
-                <button className="login-signup-button">Sign Up</button>
+                <button className="login-signup-button">Sign Up <FontAwesomeIcon icon={faUserPlus} flip /></button>
               </Link>
               <Link to={"/login"}>
-                <button className="login-signup-button">Login</button>
+                <button className="login-signup-button">Login <FontAwesomeIcon icon={faRightToBracket} flip/></button>
               </Link>
             </div>
           )}
