@@ -62,6 +62,9 @@ const NavbarTodo = ({ user }) => {
               <Link to={"/login"}>
                 <button className="login-signup-button">Login <FontAwesomeIcon icon={faRightToBracket} flip/></button>
               </Link>
+              <Link to={"/login-phone"}>
+                <button className="login-signup-button">Login with number <FontAwesomeIcon icon={faRightToBracket} flip/></button>
+              </Link>
             </div>
           )}
         </div>

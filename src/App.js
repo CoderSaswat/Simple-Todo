@@ -13,6 +13,7 @@ import { ViewTodos } from "./components/ViewTodos";
 import { SecuredRoute } from "./components/SecuredRoute";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import UpdateTodo from "./components/UpdateTodo";
+import { SignInPhone } from "./components/SignInPhone";
 
 const App = () => {
   const [isLoader, setIsLoader] = useState(false);
@@ -101,6 +102,7 @@ const App = () => {
             }
           />
           <Route path="/update-todo/:id" element={<UpdateTodo />} />
+          <Route path="/login-phone" element={<SignInPhone />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -46,6 +46,7 @@ const Login = ({ user }) => {
       });
   };
   const handleLogin = () => {
+    firebase.auth().signInWithPhoneNumber()
     login(data)
       .then((response) => {
         localStorage.setItem("accessToken", response.accessToken);
