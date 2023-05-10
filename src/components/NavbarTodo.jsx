@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import firebase from "../sevices/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket, faRightToBracket, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { getUsersMe } from "../sevices/userService";
 const NavbarTodo = ({ user }) => {
   const { currentUser, setCurrentUser } = user;
   return (
@@ -65,6 +66,19 @@ const NavbarTodo = ({ user }) => {
               <Link to={"/login-phone"}>
                 <button className="login-signup-button">Login with number <FontAwesomeIcon icon={faRightToBracket} flip/></button>
               </Link>
+                <button className="login-signup-button" onClick={()=>{
+                  firebase.auth().signInAnonymously().then((res)=>{
+                    console.log("An", res)
+                    localStorage.setItem("accessToken", res?.user?._delegate?.accessToken);
+                    getUsersMe().then((res)=>{
+                      setCurrentUser(res)
+                    }).catch((err)=>{
+                      console.log(err)
+                    })
+                  }).catch((err)=>{
+                    console.log(err)
+                  })
+                }}>Anonymous<FontAwesomeIcon icon={faRightToBracket} flip/></button>
             </div>
           )}
         </div>
