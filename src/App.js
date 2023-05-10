@@ -102,7 +102,7 @@ const App = () => {
             }
           />
           <Route path="/update-todo/:id" element={<UpdateTodo />} />
-          <Route path="/login-phone" element={<SignInPhone />} />
+          <Route path="/login-phone" element={<SignInPhone user={{ currentUser, setCurrentUser }}/>} />
         </Routes>
       </BrowserRouter>
     </>

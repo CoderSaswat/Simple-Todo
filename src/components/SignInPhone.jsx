@@ -4,8 +4,10 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import firebase from "../sevices/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { RecaptchaVerifier } from "firebase/auth";
+import { getUsersMe } from "../sevices/userService";
 
-export const SignInPhone = () => {
+export const SignInPhone = ({ user }) => {
+    const { setCurrentUser } = user;
   const [phoneNumber, setPhoneNumber] = useState("");
   const [verificationId, setVerificationId] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
@@ -48,6 +50,13 @@ export const SignInPhone = () => {
         .auth()
         .signInWithCredential(credential);
       console.log("User details after verification-> ", userCredential.user);
+      localStorage.setItem("accessToken", userCredential?.user?._delegate?.accessToken);
+      getUsersMe().then((res)=>{
+        setCurrentUser(res);
+        console.log(res)
+      }).catch((err)=>{
+        console.log("Me err", err)
+      })
     } catch (error) {
       console.log(error);
     }
@@ -99,11 +108,6 @@ export const SignInPhone = () => {
                 onClick={handleVerifyCode}
               >
                 VerifyOtp
-                <img
-                  height={"20px"}
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/706px-Google_%22G%22_Logo.svg.png"
-                  alt=""
-                />
                 {/* Login with <FontAwesomeIcon icon={faGoogleLogo} /> */}
               </button>
             </div>
