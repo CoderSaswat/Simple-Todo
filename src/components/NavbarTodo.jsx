@@ -2,7 +2,7 @@ import React from "react";
 import "./navbarTodo.css";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import firebase from "../sevices/firebase";
 const NavbarTodo = ({ user }) => {
   const { currentUser, setCurrentUser } = user;
   return (
@@ -44,6 +44,7 @@ const NavbarTodo = ({ user }) => {
                   onClick={() => {
                     localStorage.clear();
                     setCurrentUser(null);
+                    firebase.auth().signOut();
                     toast.success("logged out succesfully");
                   }}
                 >
