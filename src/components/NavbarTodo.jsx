@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import firebase from "../sevices/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightFromBracket, faRightToBracket, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRightFromBracket,
+  faRightToBracket,
+  faUserPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { getUsersMe } from "../sevices/userService";
 const NavbarTodo = ({ user }) => {
   const { currentUser, setCurrentUser } = user;
@@ -16,6 +20,7 @@ const NavbarTodo = ({ user }) => {
         </div>
         {currentUser != null ? (
           <>
+            <div className="narbar-side-buttons"></div>
             <div>
               <Link to={"/add-todo"}>
                 <button className="login-signup-button">Add Todo</button>
@@ -27,9 +32,7 @@ const NavbarTodo = ({ user }) => {
               </Link>
             </div>
           </>
-        ) : (
-          null
-        )}
+        ) : null}
         <div className="user-info">
           <img
             src={currentUser?.profilePhotoUrl}
@@ -58,27 +61,49 @@ const NavbarTodo = ({ user }) => {
           ) : (
             <div>
               <Link to={"/signup"}>
-                <button className="login-signup-button">Sign Up <FontAwesomeIcon icon={faUserPlus} flip /></button>
+                <button className="login-signup-button">
+                  Sign Up <FontAwesomeIcon icon={faUserPlus} flip />
+                </button>
               </Link>
               <Link to={"/login"}>
-                <button className="login-signup-button">Login <FontAwesomeIcon icon={faRightToBracket} flip/></button>
+                <button className="login-signup-button">
+                  Login <FontAwesomeIcon icon={faRightToBracket} flip />
+                </button>
               </Link>
               <Link to={"/login-phone"}>
-                <button className="login-signup-button">Login with number <FontAwesomeIcon icon={faRightToBracket} flip/></button>
+                <button className="login-signup-button">
+                  Login with number{" "}
+                  <FontAwesomeIcon icon={faRightToBracket} flip />
+                </button>
               </Link>
-                <button className="login-signup-button" onClick={()=>{
-                  firebase.auth().signInAnonymously().then((res)=>{
-                    console.log("An", res)
-                    localStorage.setItem("accessToken", res?.user?._delegate?.accessToken);
-                    getUsersMe().then((res)=>{
-                      setCurrentUser(res)
-                    }).catch((err)=>{
-                      console.log(err)
+              <button
+                className="login-signup-button"
+                onClick={() => {
+                  firebase
+                    .auth()
+                    .signInAnonymously()
+                    .then((res) => {
+                      console.log("An", res);
+                      localStorage.setItem(
+                        "accessToken",
+                        res?.user?._delegate?.accessToken
+                      );
+                      getUsersMe()
+                        .then((res) => {
+                          setCurrentUser(res);
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
                     })
-                  }).catch((err)=>{
-                    console.log(err)
-                  })
-                }}>Anonymous<FontAwesomeIcon icon={faRightToBracket} flip/></button>
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                }}
+              >
+                Anonymous
+                <FontAwesomeIcon icon={faRightToBracket} flip />
+              </button>
             </div>
           )}
         </div>

@@ -19,7 +19,7 @@ const App = () => {
   const [isLoader, setIsLoader] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
-    if (localStorage.getItem("accessToken") != null) {
+    if (localStorage.getItem("accessToken") != null) {  
       getUsersMe()
         .then((res) => {
           setCurrentUser(res);

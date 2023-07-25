@@ -25,10 +25,10 @@ const SignUp = ({user}) => {
         navigator("/add-todo");
       }).catch((err)=>{
         toast(err.response.data.message);
-      });
+      })
     }).catch((err)=>{
-      toast.error(err.response.data.message)
-    });
+      toast.error(err.response.data.message);
+  })
   };
   return (
     <>
